@@ -20,10 +20,10 @@ const Recipes = () => {
           <img src={r.url} alt="" />
         </div>
         <h4 className="text-[#222831] font-bold text-2xl">
-          Dish name: <span className="font-semibold">{r.title}</span>
+          Dish: <span className="font-semibold">{r.title}</span>
         </h4>
         <h4 className="text-[#222831] font-bold text-2xl">
-          Created by: <span className="font-semibold">{r.chef}</span>
+          Chef: <span className="font-semibold">{r.chef}</span>
         </h4>
         <p className="text-[#222831] font-bold text-2xl">
           Details: <br />{" "}
@@ -40,7 +40,8 @@ const Recipes = () => {
 
   return (
     <>
-      <h2 className="text-6xl font-thin ml-20">Here are your recipes...</h2>
+      <h2 className="text-6xl font-thin ml-20 mb-4">Your Personal Cookbook Starts Here...</h2>
+      <p className="text-lg font-thin ml-22">From everyday meals to gourmet dishes, your next favorite recipe is just a scroll away.</p>
       <div className="p-20 w-[100%] flex flex-wrap gap-10 justify-center">
         {renderrecipes}
       </div>
