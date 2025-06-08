@@ -16,14 +16,17 @@ const CreateRecipes = () => {
 
   const submithandler = (rec) => {
     rec.id = nanoid();
-
-    setrecipe([...recipe, rec]);
+    const copy = [...recipe]
+    copy.push(rec)
+    setrecipe(copy);
+    // console.log(copy)
+    localStorage.setItem("rec", JSON.stringify(copy))
     toast.success("Recipe added!");
     reset();
   };
 
   return (
-    <div className="flex flex-col sm:flex-row w-full h-full items-center justify-around gap-10 px-4 py-8">
+    <div className="flex flex-col sm:flex-row w-[100%] h-[100%] items-center justify-around gap-10 px-4 py-8">
       <div className="w-full sm:w-1/2 md:w-[40%]">
         <img
           src="https://media.gettyimages.com/id/1220017909/photo/top-view-table-full-of-food.jpg?s=612x612&w=0&k=20&c=UzzJrIttGJbjHoXHRrKNVimV-cBzZmKdvUpJel3g7Ns="
@@ -34,15 +37,15 @@ const CreateRecipes = () => {
 
       <form
         onSubmit={handleSubmit(submithandler)}
-        className="w-full sm:w-1/2 md:w-[40%] flex flex-col items-start justify-center bg-[#393E46] px-6 py-6 rounded-lg shadow-lg"
+        className="w-full sm:w-1/2 md:w-[40%] flex flex-col items-start justify-center bg-[#1E293B] text-gray-100 px-6 py-6 rounded-lg shadow-lg"
       >
-        <h3 className="text-2xl md:text-4xl mb-6 font-semibold text-white">
+        <h3 className="text-2xl md:text-4xl mb-6 font-semibold text-[#FACC15]">
           Create your own recipe
         </h3>
 
         <input
           {...register("url", { required: "URL cannot be empty" })}
-          className="w-full px-3 py-2 text-base md:text-lg outline-none border rounded"
+          className="w-full px-3 py-2 text-base md:text-lg outline-none border rounded bg-slate-700 placeholder-gray-400"
           type="url"
           placeholder="Enter image URL"
         />
@@ -52,7 +55,7 @@ const CreateRecipes = () => {
 
         <input
           {...register("title", { required: "Title cannot be empty" })}
-          className="w-full px-3 py-2 text-base md:text-lg outline-none border rounded"
+          className="w-full px-3 py-2 text-base md:text-lg outline-none border rounded bg-slate-700 placeholder-gray-400"
           type="text"
           placeholder="Enter recipe title"
         />
@@ -62,7 +65,7 @@ const CreateRecipes = () => {
 
         <input
           {...register("chef", { required: "Chef name cannot be empty" })}
-          className="w-full px-3 py-2 text-base md:text-lg outline-none border rounded"
+          className="w-full px-3 py-2 text-base md:text-lg outline-none border rounded bg-slate-700 placeholder-gray-400"
           type="text"
           placeholder="Enter chef name"
         />
@@ -74,7 +77,7 @@ const CreateRecipes = () => {
           {...register("description", {
             required: "Description cannot be empty",
           })}
-          className="w-full outline-none text-base md:text-lg border px-3 pt-2 resize-none rounded-md"
+          className="w-full outline-none text-base md:text-lg border px-3 pt-2 resize-none rounded-md bg-slate-700 placeholder-gray-400"
           placeholder="Recipe description here..."
         ></textarea>
         <small className="text-sm text-red-500 mb-3">
@@ -85,7 +88,7 @@ const CreateRecipes = () => {
           {...register("ingredients", {
             required: "Ingredients cannot be empty",
           })}
-          className="w-full outline-none text-base md:text-lg border px-3 pt-2 resize-none rounded-md"
+          className="w-full outline-none text-base md:text-lg border px-3 pt-2 resize-none rounded-md bg-slate-700 placeholder-gray-400"
           placeholder="Ingredients here...(separated by commas)"
         ></textarea>
         <small className="text-sm text-red-500 mb-3">
@@ -96,14 +99,14 @@ const CreateRecipes = () => {
           {...register("instructions", {
             required: "Instructions cannot be empty",
           })}
-          className="w-full outline-none text-base md:text-lg border px-3 pt-2 resize-none rounded-md"
+          className="w-full outline-none text-base md:text-lg border px-3 pt-2 resize-none rounded-md bg-slate-700 placeholder-gray-400"
           placeholder="Instructions here...(step-wise)"
         ></textarea>
         <small className="text-sm text-red-500 mb-4">
           {errors?.instructions?.message}
         </small>
 
-        <button className="bg-[#222831] text-white self-center font-medium px-6 py-3 rounded-lg text-lg cursor-pointer active:scale-95 hover:opacity-90 transition">
+        <button className="bg-emerald-600 text-white self-center font-medium px-6 py-3 rounded-lg text-lg cursor-pointer active:scale-95 hover:opacity-90 transition">
           Create recipe
         </button>
       </form>

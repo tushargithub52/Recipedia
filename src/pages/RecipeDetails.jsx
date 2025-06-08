@@ -3,21 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { recipes } from "../context/RecipeContext";
 
 const RecipeDetails = () => {
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   const params = useParams();
+  const { recipe } = useContext(recipes);
 
-  const { recipe, setrecipe } = useContext(recipes);
+  const rec = recipe.find((re) => re.id == params.id);
 
-  const filtered = recipe.filter((rec) => {
-    return rec.id == params.id;
-  });
-
-  const renderDetails = filtered.map((rec) => {
-    const handleBackToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-    return (
+  return rec ? (
+    <>
       <div key={rec.id} className="max-w-4xl mx-auto p-6 text-[#222831]">
         <div className="w-full h-64 md:h-96 overflow-hidden rounded-xl shadow-lg mb-6">
           <img
@@ -56,24 +49,23 @@ const RecipeDetails = () => {
         </div>
 
         <div className="flex justify-between gap-4">
-        <button
-          onClick={() => navigator(-1)}
-          className="bg-[#222831] text-white px-5 py-3 rounded-lg hover:opacity-90 active:scale-95 transition cursor-pointer"
-        >
-          ← Go Back
-        </button>
-        <button
-          onClick={handleBackToTop}
-          className="bg-[#222831] text-white px-5 py-3 rounded-lg hover:opacity-90 active:scale-95 transition cursor-pointer"
-        >
-          ↑ Back to Top
-        </button>
+          <button
+            onClick={() => navigate(-1)}
+            className="bg-[#081427] text-white px-5 py-3 rounded-lg hover:opacity-80 active:scale-96 cursor-pointer"
+          >
+            🔙 Go Back
+          </button>
+          <button 
+          onClick={()=>navigate(`/recipes/detail/update/${rec.id}`)}
+          className="bg-[#039b6d] px-4 py-3 text-gray-50 rounded-lg border-none cursor-pointer active:scale-96 hover:opacity-80 text-lg">
+            ✏️ Update Recipe
+          </button>
+        </div>
       </div>
-      </div>
-    );
-  });
-
-  return <>{renderDetails}</>;
+    </>
+  ) : (
+    <div className="text-center text-white p-8 text-xl">Loading...</div>
+  );
 };
 
 export default RecipeDetails;

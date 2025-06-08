@@ -1,9 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const recipes = createContext(null);
 
 const RecipeContext = (prop) => {
-  const [recipe, setrecipe] = useState([
+  const [recipe, setrecipe] = useState([]);
+
+  useEffect(() => {
+    setrecipe(JSON.parse(localStorage.getItem('rec')) || [
     {
       id: 1,
       url: "https://images.unsplash.com/photo-1630409346824-4f0e7b080087?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmlyaXlhbml8ZW58MHx8MHx8fDA%3D",
@@ -49,7 +52,9 @@ const RecipeContext = (prop) => {
       instructions:
         "1. Preheat oven to 475°F (245°C). 2. Spread tomato sauce evenly on rolled-out pizza dough. 3. Add slices of fresh mozzarella. 4. Bake for 10-12 minutes until crust is golden. 5. Garnish with fresh basil and drizzle olive oil before serving.",
     },
-  ]);
+  ])
+  }, [])
+  
 
   return (
     <recipes.Provider value={{ recipe, setrecipe }}>

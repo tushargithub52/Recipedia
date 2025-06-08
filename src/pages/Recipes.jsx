@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { recipes } from "../context/RecipeContext";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,23 @@ const Recipes = () => {
 
   const handlenavigate = (id) => {
     navigator(`/recipes/detail/${id}`);
+  };
+
+  const [favourite, setfavourite] = useState(
+    JSON.parse(localStorage.getItem("fav")) || []
+  );
+
+  const addtoFav = (r) => {
+    let favcopy = [...favourite, r]
+    setfavourite(favcopy);
+    localStorage.setItem('fav', JSON.stringify(favcopy));
+
+  };
+  const removefromFav = (r) => {
+    let filterfav = favourite.filter((f)=> f.id != r.id);
+    setfavourite(filterfav);
+    localStorage.setItem('fav', JSON.stringify(filterfav));
+
   };
 
   const renderrecipes = recipe.map((r) => {
@@ -31,7 +48,15 @@ const Recipes = () => {
         </h4>
         <p className="text-[#222831] font-bold text-2xl">
           Details: <br />{" "}
-          <span className="font-semibold text-lg">{r.description}</span>
+          <span className="font-semibold text-lg">
+            {r.description.slice(0, 70)}{" "}
+            <small
+              className="text-blue-600 cursor-pointer hover:text-blue-500"
+              onClick={(e) => navigator(`/recipes/detail/${r.id}`)}
+            >
+              . . . more
+            </small>
+          </span>
         </p>
         <div className="w-full flex gap-3">
           <button
@@ -40,16 +65,27 @@ const Recipes = () => {
           >
             Full recipe
           </button>
-          {/* <button className="bg-red-600 text-white px-4 py-3 text-lg font-semibold rounded-lg cursor-pointer hover:opacity-90 active:scale-95">
-            ❤️ Favourite
-          </button> */}
+
+          <span className="bg-transparent border-2 border-amber-700 text-black px-4 py-3 font-thin rounded-lg cursor-pointer hover:opacity-90 active:scale-95">
+            {favourite.find((f) => f.id == r.id) ? (
+              <i
+                onClick={()=>removefromFav(r)}
+                className="ri-poker-hearts-fill text-red-600 text-3xl"
+              ></i>
+            ) : (
+              <i
+              onClick={()=>addtoFav(r)}
+                className="ri-poker-hearts-line text-red-600 text-3xl"
+              ></i>
+            )}
+          </span>
         </div>
       </div>
     );
   });
 
   return (
-    <div className="p-5">
+    <div className="p-5 h-[100%]">
       <h2 className="text-4xl sm:text-6xl font-thin ml-6 sm:ml-20 mb-4">
         Your Personal Cookbook Starts Here...
       </h2>

@@ -10,9 +10,10 @@ const Nav = () => {
         />
       </div>
       <div className="links flex gap-20 text-2xl font-medium">
-        <NavLink className={(e) => `${e.isActive ? "border-b text-amber-300" : ""} hover:border-b transition-all ease-in-out duration-100 active:scale-90`} to="/">Home</NavLink>
-        <NavLink className={(e) => `${e.isActive ? "border-b text-amber-300" : ""} hover:border-b transition-all ease-in-out duration-100 active:scale-90`} to="/recipes">Recipes</NavLink>
-        <NavLink className={(e) => `${e.isActive ? "border-b text-amber-300" : ""} hover:border-b transition-all ease-in-out duration-100 active:scale-90`} to="/create">Create Recipe</NavLink>
+        <NavLink className={(e) => `${e.isActive ? "border-b text-amber-300" : ""} hover:border-b hover:scale-110 transition ease-in-out duration-100 active:scale-90`} to="/">Home</NavLink>
+        <NavLink className={(e) => `${e.isActive ? "border-b text-amber-300" : ""} hover:border-b hover:scale-110 transition ease-in-out duration-100 active:scale-90`} to="/recipes">Recipes</NavLink>
+        <NavLink className={(e) => `${e.isActive ? "border-b text-amber-300" : ""} hover:border-b hover:scale-110 transition ease-in-out duration-100 active:scale-90`} to="/create">Create Recipe</NavLink>
+        <NavLink className={(e) => `${e.isActive ? "border-b text-amber-300" : ""} hover:border-b hover:scale-110 transition ease-in-out duration-100 active:scale-90`} to="/fav">Favourites</NavLink>
       </div>
     </div>
   );
