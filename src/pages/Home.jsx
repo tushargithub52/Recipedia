@@ -6,7 +6,7 @@ const Home = () => {
       <main className="px-4 py-8 flex-grow">
         <section className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 mb-16">
           <div className="w-full md:w-1/2 text-center md:text-left">
-            <h1 className="text-8xl font-bold leading-tight mb-4 text-white">
+            <h1 className="text-6xl md:text-8xl font-bold leading-tight mb-4 text-white">
               Welcome to <span className="text-[#1eebf6e8]">Recipedia</span>
             </h1>
             <p className="text-lg mb-6 text-gray-200">
